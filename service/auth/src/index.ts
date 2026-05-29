@@ -48,7 +48,7 @@ await sql`
 );
 `;
   } catch (error) {
-
+    console.log("❌ Error initializing database:", error);
   }
 }
 
