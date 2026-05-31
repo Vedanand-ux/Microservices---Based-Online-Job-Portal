@@ -1,11 +1,7 @@
-import { Request, Response } from 'express';
+import {TryCatch} from "../utils/TryCatch.js";
 
-export const registetUser = async(req:Request, res:Response) =>{
-  try{
+export const registerUser = TryCatch(async (req, res) => {
+    const {email} = req.body;
 
-  }catch(error){
-    res.status(500).json({ 
-      message: 'Server error'
-    });
-  }
-}
+    res.json(email);
+});
