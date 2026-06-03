@@ -4,9 +4,9 @@ import {TryCatch} from "../utils/TryCatch.js";
 import bcrypt from "bcrypt";
 
 export const registerUser = TryCatch(async (req, res) => {
-    const {name, email, password, phonenumber, role, bio} = req.body;
+    const {name, email, password, phone_number, role, bio} = req.body;
 
-    if(!name || !email || !password || !phonenumber || !role) {
+    if(!name || !email || !password || !phone_number || !role) {
         throw new ErrorHandler(400,"All fields are required");
     }
 
@@ -21,8 +21,8 @@ export const registerUser = TryCatch(async (req, res) => {
     let registeredUser;
 
     if(role === "recruiter") {
-        const [user] = await sql`INSERT INTO users (name, email, password, phonenumber, role) VALUES (${name}, ${email}, ${hashedPassword}, ${phonenumber}, ${role}) RETURNING user_id`;
+        const [user] = await sql`INSERT INTO users (name, email, password, phone_number, role) VALUES (${name}, ${email}, ${hashedPassword}, ${phone_number}, ${role}) RETURNING user_id`;
     }
 
-    res.json(email);
+    res.json(email);    
 });
