@@ -1,6 +1,7 @@
 import { sql } from "../utils/db.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import {TryCatch} from "../utils/TryCatch.js";
+import bcrypt from "bcrypt";
 
 export const registerUser = TryCatch(async (req, res) => {
     const {name, email, password, phonenumber, role, bio} = req.body;
@@ -13,6 +14,14 @@ export const registerUser = TryCatch(async (req, res) => {
 
     if(existingUser.length > 0) {
         throw new ErrorHandler(400,"User already exists");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    let registeredUser;
+
+    if(role === "recruiter") {
+        const [user] = await sql`INSERT INTO users (name, email, password, phonenumber, role) VALUES (${name}, ${email}, ${hashedPassword}, ${phonenumber}, ${role}) RETURNING user_id`;
     }
 
     res.json(email);
