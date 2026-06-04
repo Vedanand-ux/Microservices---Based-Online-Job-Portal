@@ -26,8 +26,7 @@ export const registerUser = TryCatch(async (req, res) => {
     registeredUser =user;
     
     }else if(role==="jobseeker"){
-    // const file = req.file
-
+    const file = req.file;
     const [user] =
     await sql`INSERT INTO users (name, email, password, phone_number, role) VALUES
     (${name}, ${email}, ${hashedPassword}, ${phone_number}, ${role}) RETURNING
