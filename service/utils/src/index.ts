@@ -7,9 +7,9 @@ import { v2 as cloudinary } from "cloudinary";
 dotenv.config();
 
 cloudinary.config({
-    cloud_name: "dwxvgplcu",
-    api_key: "154711964926888",
-    api_secret: "Rj37zKjqlQHy5Tx9Q09RVv8xoFY",
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
 });
 
 const app = express();
