@@ -27,6 +27,10 @@ export const registerUser = TryCatch(async (req, res) => {
     
     }else if(role==="jobseeker"){
     const file = req.file;
+
+    if(!file) {
+        throw new ErrorHandler(400,"resume file is required for job seekers");
+    }
     const [user] =
     await sql`INSERT INTO users (name, email, password, phone_number, role) VALUES
     (${name}, ${email}, ${hashedPassword}, ${phone_number}, ${role}) RETURNING
