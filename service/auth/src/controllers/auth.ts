@@ -1,3 +1,4 @@
+import getBuffer from "../utils/buffer.js";
 import { sql } from "../utils/db.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import {TryCatch} from "../utils/TryCatch.js";
@@ -31,6 +32,13 @@ export const registerUser = TryCatch(async (req, res) => {
     if(!file) {
         throw new ErrorHandler(400,"resume file is required for job seekers");
     }
+
+    const fileBuffer = getBuffer(file)
+
+    if(!fileBuffer || !fileBuffer.content) {
+        throw new ErrorHandler(500,"falied to generate file ");
+    }
+
     const [user] =
     await sql`INSERT INTO users (name, email, password, phone_number, role) VALUES
     (${name}, ${email}, ${hashedPassword}, ${phone_number}, ${role}) RETURNING
