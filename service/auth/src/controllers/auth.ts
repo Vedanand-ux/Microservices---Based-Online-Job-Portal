@@ -48,7 +48,7 @@ export const registerUser = TryCatch(async (req, res) => {
     const [user] =
     await sql`INSERT INTO users (name, email, password, phone_number, role, bio, resume, resume_public_id) VALUES
     (${name}, ${email}, ${hashedPassword}, ${phone_number}, ${role}, ${bio}, ${data.url}, ${data.public_id}) RETURNING
-    user_id, name, email, phone_number, role, created_at`;
+    user_id, name, email, phone_number, role,bio, resume, created_at`;
 }
 
     res.json(email);    
