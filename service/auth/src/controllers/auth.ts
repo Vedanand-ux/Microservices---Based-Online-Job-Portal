@@ -51,5 +51,8 @@ export const registerUser = TryCatch(async (req, res) => {
     user_id, name, email, phone_number, role,bio, resume, created_at`;
 }
 
-    res.json(email);    
+    res.json({
+        message: "User registered successfully",
+        registeredUser
+    });    
 });
